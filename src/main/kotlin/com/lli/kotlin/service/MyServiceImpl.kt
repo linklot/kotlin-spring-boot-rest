@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
-class MyServiceImpl constructor(@Value("\${system.env:test}") val env: String) : MyService {
+class MyServiceImpl(@Value("\${system.env:test}") env: String) : MyService {
 
-    override final fun convertName(name: String) = name.toUpperCase() +" "+ env
+    private val innerEnv = env
+
+    override final fun convertName(name: String) = name.toUpperCase() + " " + this.innerEnv
 }
